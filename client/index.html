@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Connect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast"></div>
+
+  <section id="authView" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-mark">CC</div>
+      <h1>Campus Connect</h1>
+      <p class="muted">Real-time communication for your campus.</p>
+
+      <div class="tabs">
+        <button id="loginTab" class="tab active">Login</button>
+        <button id="registerTab" class="tab">Register</button>
+      </div>
+
+      <form id="authForm">
+        <input id="name" placeholder="Full name" class="register-only hidden">
+        <input id="email" type="email" placeholder="Email" required>
+        <input id="password" type="password" placeholder="Password" minlength="6" required>
+        <input id="department" placeholder="Department (e.g. CSE)" class="register-only hidden">
+        <select id="role" class="register-only hidden">
+          <option value="student">Student</option>
+          <option value="faculty">Faculty</option>
+        </select>
+        <button class="primary" type="submit" id="authButton">Login</button>
+      </form>
+      <p id="authMessage" class="error"></p>
+    </div>
+  </section>
+
+  <section id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <div>
+          <div class="brand-title">Campus Connect</div>
+          <div id="currentUser" class="muted small"></div>
+        </div>
+        <button id="logoutButton" class="icon-button" title="Logout">↪</button>
+      </div>
+
+      <div class="side-section">
+        <div class="section-title">People</div>
+        <div id="usersList"></div>
+      </div>
+
+      <div class="side-section groups">
+        <div class="section-row">
+          <div class="section-title">Groups</div>
+          <button id="newGroupButton" class="tiny-button">+</button>
+        </div>
+        <div id="groupsList"></div>
+      </div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="chat-head">
+        <div>
+          <h2 id="chatTitle">Select a conversation</h2>
+          <div id="chatSubtitle" class="muted small">One-to-one and group messaging</div>
+        </div>
+        <div id="onlineDot" class="status-pill">Prototype</div>
+      </header>
+
+      <div id="messages" class="messages">
+        <div class="empty-state">
+          <div class="empty-icon">CC</div>
+          <h3>Welcome to Campus Connect</h3>
+          <p>Choose a person or group to start a real-time conversation.</p>
+        </div>
+      </div>
+
+      <form id="messageForm" class="composer hidden">
+        <input id="messageInput" autocomplete="off" placeholder="Type a message...">
+        <button class="primary send-button">Send</button>
+      </form>
+    </main>
+  </section>
+
+  <div id="groupModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Create a group</h3>
+      <form id="groupForm">
+        <input id="groupName" placeholder="Group name" required>
+        <select id="groupType">
+          <option value="department">Department</option>
+          <option value="club">Club</option>
+        </select>
+        <div class="modal-actions">
+          <button type="button" id="cancelGroup" class="secondary">Cancel</button>
+          <button class="primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
